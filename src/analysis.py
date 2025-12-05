@@ -17,5 +17,12 @@ insert_data_sql = open("sql/insert_data.sql", "r").read()
 db_access.execute(insert_data_sql)
 
 
-# Printing the table as a pandas DataFrame.
-print(db_access.execute("SELECT * FROM daily_info").fetchdf())
+# Calculating the daily returns, ie filling the daily_returns table.
+calc_returns_sql = open("sql/calc_returns.sql", "r").read()
+db_access.execute(calc_returns_sql)
+
+
+# Printing the raw data table as a pandas DataFrame.
+print(db_access.execute("SELECT * FROM raw_daily_info").fetchdf())
+# Printing the daily returns table as a pandas DataFrame.
+print(db_access.execute("SELECT * FROM daily_returns").fetchdf())
